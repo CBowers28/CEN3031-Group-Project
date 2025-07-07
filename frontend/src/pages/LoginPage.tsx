@@ -7,7 +7,7 @@ const LoginPage: React.FC = () => {
         <div style={{
             height: "100vh",
             width: "100vw",
-            background: "#ffffff",
+            background: "#c1bfc0",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
