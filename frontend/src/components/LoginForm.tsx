@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    // Edit this to add login functionality
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         // Used for testing
         console.log('Email: ', email);
         console.log('Password: ', password);
-
+        navigate('/dashboard'); // redirect after login
     };
 
     return(
