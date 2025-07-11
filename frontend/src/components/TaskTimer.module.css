@@ -1,0 +1,110 @@
+.timerContainer {
+    background: #ffffff;
+    border: 2px solid #1a1a1a;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.timerHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.taskTitle {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.estimatedTime {
+    background: #1a1a1a;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.readyState {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.readyText {
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    color: #666666;
+    font-weight: 500;
+}
+
+.startButton {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.startButton:hover {
+    background: #218838;
+}
+
+.activeState {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.timerDisplay, .pointsDisplay {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.timeLabel, .pointsLabel {
+    font-weight: 500;
+    color: #666666;
+}
+
+.timeValue {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    font-family: 'Courier New', monospace;
+}
+
+.pointsValue {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #28a745;
+}
+
+.completeButton {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.completeButton:hover {
+    background: #0056b3;
+} 

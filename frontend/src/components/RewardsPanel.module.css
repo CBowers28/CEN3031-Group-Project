@@ -1,0 +1,166 @@
+.rewardsPanel {
+    flex: 1;
+    border: 3px solid #2c3e50; /* Dark blue-gray border (inverse of matcha) */
+    border-radius: 16px;
+    background: linear-gradient(135deg, #2c3e50, #34495e); /* Dark gradient (inverse of beige) */
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    min-width: 320px;
+    max-width: 420px;
+    box-shadow: 0 8px 24px rgba(44, 62, 80, 0.3);
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: calc(100vh - 4rem);
+}
+
+.rewardsPanel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.rewardsPanel::-webkit-scrollbar-track {
+    background: #2c3e50;
+    border-radius: 4px;
+}
+
+.rewardsPanel::-webkit-scrollbar-thumb {
+    background: #6b8e6b;
+    border-radius: 4px;
+}
+
+.rewardsPanel::-webkit-scrollbar-thumb:hover {
+    background: #8fbc8f;
+}
+
+.panelTitle {
+    text-align: center;
+    color: #ecf0f1; /* Light text (inverse of dark text) */
+    margin: 0 0 1.5rem 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Poppins', 'Inter', sans-serif;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #6b8e6b; /* Matcha green border (inverse of matcha border) */
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+}
+
+.tokenSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.tokenCard {
+    background: #f5f5dc; /* Beige background (inverse of dark) */
+    color: #2c3e50; /* Dark text (inverse of light) */
+    padding: 1.25rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(245, 245, 220, 0.2);
+    border: 2px solid #8fbc8f; /* Matcha green border */
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.tokenCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(245, 245, 220, 0.3);
+    border-color: #6b8e6b;
+}
+
+.tokenTitle {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #2c3e50;
+    font-family: 'Poppins', 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+}
+
+.tokenAmount {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0.5rem 0;
+    color: #8fbc8f; /* Matcha green */
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    letter-spacing: 0.02em;
+}
+
+.statsSection {
+    background: rgba(245, 245, 220, 0.1); /* Beige with low opacity */
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border: 2px solid rgba(143, 188, 143, 0.3); /* Matcha green border */
+    font-family: 'Inter', sans-serif;
+}
+
+.statItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 2px solid rgba(143, 188, 143, 0.2);
+}
+
+.statItem:last-child {
+    border-bottom: none;
+}
+
+.statLabel {
+    font-weight: 600;
+    color: #ecf0f1; /* Light text */
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.statValue {
+    font-weight: 700;
+    color: #8fbc8f; /* Matcha green */
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.infoSection {
+    background: rgba(245, 245, 220, 0.1); /* Beige with low opacity */
+    border-radius: 12px;
+    padding: 1.25rem;
+    border-left: 4px solid #8fbc8f; /* Matcha green accent */
+    font-family: 'Inter', sans-serif;
+}
+
+.infoTitle {
+    margin: 0 0 0.75rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ecf0f1; /* Light text */
+    font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+.infoList {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: #ecf0f1; /* Light text */
+    font-size: 0.9rem;
+    line-height: 1.5;
+    font-family: 'Inter', sans-serif;
+}
+
+.infoList li {
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.infoList li:last-child {
+    margin-bottom: 0;
+}
+
+.infoList li::marker {
+    color: #8fbc8f; /* Matcha green bullets */
+} 
