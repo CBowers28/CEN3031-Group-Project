@@ -4,15 +4,34 @@ import { useNavigate } from 'react-router-dom';
 const LoginForm: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
-    // Edit this to add login functionality
+    
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Used for testing
-        console.log('Email: ', email);
-        console.log('Password: ', password);
-        navigate('/dashboard'); // redirect after login
-    };
+        setError(null);
+        
+        fetch('http://localhost:5000/api/login')
+          .then(res => {
+            if (!res.ok) throw new Error('Network response not ok');
+            return res.json();
+          })
+          .then((users: { id: number; email: string; password: string }[]) => {
+            const user = users.find(
+              (u) => u.email === email && u.password === password
+            );
+        
+            if (user) {
+              navigate('/dashboard');
+            } else {
+              setError('Invalid email or password');
+            }
+          })
+          .catch((err) => {
+            console.error('Failed to fetch:', err);
+            setError('Failed to connect to server');
+          });
+        };
 
     return(
         <form
