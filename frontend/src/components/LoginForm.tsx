@@ -11,28 +11,32 @@ const LoginForm: React.FC = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
-        
-        fetch('http://localhost:5000/api/login')
-          .then(res => {
-            if (!res.ok) throw new Error('Network response not ok');
+
+        console.log("Submitting login", { email, password });
+
+        fetch('http://localhost:5000/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        })
+        .then((res) => {
+            if (!res.ok) throw new Error('Invalid login');
             return res.json();
-          })
-          .then((users: { id: number; email: string; password: string }[]) => {
-            const user = users.find(
-              (u) => u.email === email && u.password === password
-            );
-        
-            if (user) {
-              navigate('/dashboard');
+        })
+        .then((data) => {
+            if (data.success) {
+                navigate('/dashboard');
             } else {
-              setError('Invalid email or password');
+                setError('Invalid email or password');
             }
-          })
-          .catch((err) => {
-            console.error('Failed to fetch:', err);
-            setError('Failed to connect to server');
-          });
-        };
+        })
+        .catch((err) => {
+            console.error('Login error:', err);
+            setError('Login failed');
+        });
+    };
 
     return (
         <div className={styles.loginContainer}>
@@ -58,7 +62,7 @@ const LoginForm: React.FC = () => {
                         className={styles.input}
                     />
                     <div className={styles.icon}>
-                        ✉️
+                        ✉
                     </div>
                 </div>
 
