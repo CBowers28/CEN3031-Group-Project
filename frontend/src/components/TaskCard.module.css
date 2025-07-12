@@ -1,0 +1,422 @@
+.taskCard {
+    background: #f5f5dc; /* Beige background */
+    border: 2px solid #8fbc8f; /* Matcha green border */
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    position: relative !important;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 2px 4px rgba(143, 188, 143, 0.1);
+    height: fit-content;
+    min-height: 140px;
+}
+
+
+
+.taskCard.inProgress {
+    background: #2c3e50; /* Dark blue-gray */
+    border-color: #34495e;
+    color: #ecf0f1;
+    cursor: default;
+    transform: none;
+    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
+}
+
+.taskCard.inProgress:hover {
+    transform: none;
+    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
+}
+
+.taskCard.completed {
+    background: #8fbc8f; /* Matcha green */
+    border-color: #6b8e6b;
+    color: #2c3e50;
+}
+
+.taskHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.taskTitle {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #2c3e50;
+    font-family: 'Poppins', 'Inter', sans-serif;
+    letter-spacing: -0.02em;
+}
+
+.taskCard.inProgress .taskTitle {
+    color: #ecf0f1;
+}
+
+.taskCard.completed .taskTitle {
+    color: #2c3e50;
+}
+
+.taskTime {
+    background: #8fbc8f; /* Matcha green */
+    color: #2c3e50;
+    padding: 0.35rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+}
+
+.taskCard.inProgress .taskTime {
+    background: #34495e;
+    color: #ecf0f1;
+}
+
+.taskCard.completed .taskTime {
+    background: #6b8e6b;
+    color: #f5f5dc;
+}
+
+.addButton {
+    background: #8fbc8f; /* Matcha green */
+    color: #2c3e50;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 2px 8px rgba(143, 188, 143, 0.3);
+}
+
+.addButton:hover {
+    background: #6b8e6b;
+}
+
+.taskDescription {
+    background: #6b8e6b !important; /* Darker matcha green */
+    color: #f5f5dc !important;
+    padding: 0.75rem !important;
+    border-radius: 8px !important;
+    font-size: 0.7rem !important;
+    line-height: 1.1 !important;
+    margin-top: 0.5rem !important;
+    font-family: 'Inter', sans-serif !important;
+    border: 1px solid #5a7a5a !important;
+    height: 80px !important;
+    overflow: hidden !important;
+    word-wrap: break-word !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical !important;
+    text-overflow: ellipsis !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+}
+
+.cashDisplay {
+    position: absolute !important;
+    bottom: 0.5rem !important;
+    right: 0.5rem !important;
+    color: white !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.completionMessage {
+    background: #8fbc8f; /* Solid matcha green */
+    color: #2c3e50;
+    padding: 1.25rem;
+    border-radius: 12px;
+    margin-top: 0.75rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.completionMessage h5 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.completionMessage p {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.completionMessage blockquote {
+    margin: 0;
+    font-style: italic;
+    font-size: 0.85rem;
+    opacity: 0.9;
+    border-left: 3px solid rgba(255, 255, 255, 0.5);
+    padding-left: 0.75rem;
+}
+
+.timerSection {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid rgba(143, 188, 143, 0.3);
+}
+
+.taskCard.inProgress .timerSection {
+    border-top-color: rgba(236, 240, 241, 0.3);
+}
+
+.taskCard.completed .timerSection {
+    border-top-color: rgba(44, 62, 80, 0.3);
+}
+
+.readyState {
+    text-align: center;
+    padding: 0.5rem 0;
+}
+
+.readyText {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+    color: #666666;
+    font-weight: 500;
+}
+
+.startButton {
+    background: #8fbc8f; /* Matcha green */
+    color: #2c3e50;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-right: 0.75rem;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+    box-shadow: 0 2px 8px rgba(143, 188, 143, 0.3);
+}
+
+.startButton:hover {
+    background: #6b8e6b;
+}
+
+.resetButton {
+    background: #e74c3c; /* Red */
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+}
+
+.resetButton:hover {
+    background: #c0392b;
+}
+
+.activeState {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.timerDisplay, .pointsDisplay, .progressDisplay {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: rgba(143, 188, 143, 0.1);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(143, 188, 143, 0.2);
+    font-family: 'Inter', sans-serif;
+}
+
+.taskCard.inProgress .timerDisplay, 
+.taskCard.inProgress .pointsDisplay, 
+.taskCard.inProgress .progressDisplay {
+    background: rgba(236, 240, 241, 0.1);
+    border-color: rgba(236, 240, 241, 0.3);
+}
+
+.taskCard.completed .timerDisplay, 
+.taskCard.completed .pointsDisplay, 
+.taskCard.completed .progressDisplay {
+    background: rgba(44, 62, 80, 0.1);
+    border-color: rgba(44, 62, 80, 0.2);
+}
+
+.timeLabel, .pointsLabel, .progressLabel {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 0.85rem;
+}
+
+.taskCard.inProgress .timeLabel, 
+.taskCard.inProgress .pointsLabel, 
+.taskCard.inProgress .progressLabel {
+    color: #ecf0f1;
+}
+
+.taskCard.completed .timeLabel, 
+.taskCard.completed .pointsLabel, 
+.taskCard.completed .progressLabel {
+    color: #2c3e50;
+}
+
+.timeValue {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #2c3e50;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    letter-spacing: 0.02em;
+}
+
+.taskCard.inProgress .timeValue {
+    color: #ecf0f1;
+}
+
+.taskCard.completed .timeValue {
+    color: #2c3e50;
+}
+
+.pointsValue {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #8fbc8f; /* Matcha green */
+    font-family: 'Inter', sans-serif;
+}
+
+.taskCard.inProgress .pointsValue {
+    color: #f39c12; /* Orange for contrast */
+}
+
+.taskCard.completed .pointsValue {
+    color: #6b8e6b;
+}
+
+.progressValue {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #f39c12; /* Orange */
+    font-family: 'Inter', sans-serif;
+}
+
+.progressValue.completed {
+    color: #8fbc8f; /* Matcha green */
+}
+
+.taskCard.inProgress .progressValue.completed {
+    color: #2ecc71; /* Bright green for contrast */
+}
+
+.pauseButton, .resumeButton {
+    background: #f39c12; /* Orange */
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+    box-shadow: 0 2px 8px rgba(243, 156, 18, 0.3);
+}
+
+.pauseButton:hover {
+    background: #e67e22;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(243, 156, 18, 0.4);
+}
+
+.resumeButton {
+    background: #3498db; /* Blue */
+}
+
+.resumeButton:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+}
+
+.completeButton {
+    background: #8fbc8f; /* Matcha green */
+    color: #2c3e50;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+    box-shadow: 0 2px 8px rgba(143, 188, 143, 0.3);
+}
+
+.completeButton:hover:not(.disabled) {
+    background: #6b8e6b;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(143, 188, 143, 0.4);
+}
+
+.completeButton.disabled {
+    background: #95a5a6; /* Gray */
+    color: #7f8c8d;
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+    box-shadow: none;
+}
+
+.quitButton {
+    background: #e74c3c; /* Red */
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+    margin-top: 0.5rem;
+}
+
+.quitButton:hover {
+    background: #c0392b;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+} 

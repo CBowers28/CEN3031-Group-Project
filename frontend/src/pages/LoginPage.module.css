@@ -1,0 +1,54 @@
+.container {
+    height: 100vh;
+    width: 100vw;
+    background: #f5f5dc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+.mainContent {
+    z-index: 2;
+    text-align: center;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.brandTitle {
+    font-size: 4rem;
+    font-weight: 700;
+    margin: 0;
+    color: #8fbc8f;
+    text-shadow: 0 4px 8px rgba(143, 188, 143, 0.3);
+    font-family: 'Poppins', 'Inter', sans-serif;
+    letter-spacing: 0.1em;
+}
+
+.motivationalQuote {
+    font-size: 1.2rem;
+    margin: 1rem 0 0 0;
+    font-style: italic;
+    max-width: 600px;
+    line-height: 1.6;
+    color: #8fbc8f;
+    font-family: 'Inter', sans-serif;
+}
+
+.quoteAuthor {
+    font-size: 0.9rem;
+    margin: 0.5rem 0 0 0;
+    font-style: italic;
+    color: #6b8e6b;
+    font-family: 'Inter', sans-serif;
+}
+
+.formContainer {
+    z-index: 2;
+}
+
+ 

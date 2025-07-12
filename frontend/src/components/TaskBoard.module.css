@@ -1,0 +1,60 @@
+.taskBoard {
+    display: flex;
+    gap: 2.5rem;
+    height: calc(100vh - 4rem);
+    width: 100%;
+    padding: 0 2rem;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.column {
+    flex: 1;
+    border: 3px solid #8fbc8f; /* Matcha green border */
+    border-radius: 16px;
+    background: #f5f5dc; /* Solid color instead of gradient */
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    min-width: 320px;
+    max-width: 420px;
+    box-shadow: 0 4px 12px rgba(143, 188, 143, 0.1);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #8fbc8f #f5f5dc;
+    /* Scroll performance optimizations */
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: auto;
+}
+
+.column::-webkit-scrollbar {
+    width: 8px;
+}
+
+.column::-webkit-scrollbar-track {
+    background: #f5f5dc;
+    border-radius: 4px;
+}
+
+.column::-webkit-scrollbar-thumb {
+    background: #8fbc8f;
+    border-radius: 4px;
+}
+
+.column::-webkit-scrollbar-thumb:hover {
+    background: #6b8e6b;
+}
+
+.columnTitle {
+    text-align: center;
+    color: #2c3e50;
+    margin: 0 0 1.5rem 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Poppins', 'Inter', sans-serif;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #8fbc8f;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+} 

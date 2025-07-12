@@ -1,18 +1,30 @@
 import React from "react";
 import LoginForm from "../components/LoginForm";
+import styles from "./LoginPage.module.css";
 
-//defines LoginPage as a functional component
 const LoginPage: React.FC = () => {
     return (
-        <div style={{
-            height: "100vh",
-            width: "100vw",
-            background: "#c1bfc0",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-        }}>
-            <LoginForm />
+        <div className={styles.container}>
+            {/* Main content */}
+            <div className={styles.mainContent}>
+                {/* Nepsis Logo/Brand */}
+                <h1 className={styles.brandTitle}>
+                    NEPSIS
+                </h1>
+                
+                {/* Motivational Quote */}
+                <p className={styles.motivationalQuote}>
+                    "Discipline is the bridge between goals and accomplishment."
+                </p>
+                <p className={styles.quoteAuthor}>
+                    — Jim Rohn
+                </p>
+            </div>
+            
+            {/* Login Form */}
+            <div className={styles.formContainer}>
+                <LoginForm />
+            </div>
         </div>
     );
 };
