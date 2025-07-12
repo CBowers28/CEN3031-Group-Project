@@ -65,6 +65,18 @@
     font-size: 1.2rem;
 }
 
+.errorMessage {
+    color: #e74c3c;
+    background: #fdf2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    text-align: center;
+    width: 280px;
+    font-family: 'Inter', sans-serif;
+}
+
 .submitButton {
     width: 280px;
     padding: 1rem;

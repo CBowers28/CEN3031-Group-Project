@@ -5,21 +5,34 @@ import styles from './LoginForm.module.css';
 const LoginForm: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
-
-    const handleSubmit = async (e: React.FormEvent) => {
+    
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        setIsLoading(true);
+        setError(null);
         
-        // Simulate loading for better UX
-        setTimeout(() => {
-            console.log('Email: ', email);
-            console.log('Password: ', password);
-            setIsLoading(false);
-            navigate('/dashboard');
-        }, 1000);
-    };
+        fetch('http://localhost:5000/api/login')
+          .then(res => {
+            if (!res.ok) throw new Error('Network response not ok');
+            return res.json();
+          })
+          .then((users: { id: number; email: string; password: string }[]) => {
+            const user = users.find(
+              (u) => u.email === email && u.password === password
+            );
+        
+            if (user) {
+              navigate('/dashboard');
+            } else {
+              setError('Invalid email or password');
+            }
+          })
+          .catch((err) => {
+            console.error('Failed to fetch:', err);
+            setError('Failed to connect to server');
+          });
+        };
 
     return (
         <div className={styles.loginContainer}>
@@ -64,13 +77,19 @@ const LoginForm: React.FC = () => {
                     </div>
                 </div>
 
+                {/* Error Message */}
+                {error && (
+                    <div className={styles.errorMessage}>
+                        {error}
+                    </div>
+                )}
+
                 {/* Submit Button */}
                 <button 
                     type="submit" 
-                    disabled={isLoading}
                     className={styles.submitButton}
                 >
-                    {isLoading ? 'Signing In...' : 'Sign In'}
+                    Sign In
                 </button>
             </form>
         </div>
