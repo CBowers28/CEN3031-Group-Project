@@ -13,12 +13,10 @@ ACTIVATE_PATH = os.path.join(VENV_DIR, "bin", "activate")
 DB_USERNAME = "admin"
 DB_PASSWORD = "admin"
 
-
 def ensure_root():
     if os.name != "nt" and os.geteuid() != 0:
         print("Elevating to root...")
         os.execvp("sudo", ["sudo"] + sys.argv)
-
 
 def run_command(command_list, ignore_error=False):
     try:
@@ -30,7 +28,6 @@ def run_command(command_list, ignore_error=False):
         else:
             print(f"Command failed: {e}")
             sys.exit(1)
-
 
 def detect_os():
     os_name = platform.system().lower()
@@ -57,7 +54,6 @@ def detect_os():
         return "windows"
     return "unknown"
 
-
 def install_pip_and_venv(os_id):
     if shutil.which("pip3") and os.path.exists("/usr/lib/python3/dist-packages/venv"):
         print("pip3 and venv already installed.")
@@ -80,7 +76,6 @@ def install_pip_and_venv(os_id):
         print(f"Unsupported OS for pip installation: {os_id}")
         sys.exit(1)
 
-
 def install_python_packages_in_venv():
     if not os.path.exists(VENV_DIR):
         print(f"Creating virtual environment at {VENV_DIR}...")
@@ -93,7 +88,6 @@ def install_python_packages_in_venv():
 
     print("Installing Flask and psycopg2-binary in virtual environment...")
     run_command([pip_path, "install", "Flask", "psycopg2-binary", "flask-cors"])
-
 
 def create_flask_app_files():
     os.makedirs(APP_DIR, exist_ok=True)
@@ -167,11 +161,11 @@ def login():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
+
 """
     with open(os.path.join(APP_DIR, "app.py"), "w") as f:
         f.write(app_code)
     print("✅ Created flask_app/app.py")
-
 
 def create_runner_script():
     runner_script = f'''#!/bin/bash
@@ -193,7 +187,6 @@ echo "🚀 Starting Flask app..."
     os.chmod(run_path, 0o755)
     print(f"\n✅ All set! Run your app with:\nsudo {run_path}")
 
-
 def main():
     ensure_root()
     os_id = detect_os()
@@ -207,7 +200,6 @@ def main():
     # Automatically run it
     print("\n🚀 Running the Flask app setup script now...\n")
     subprocess.run(["sudo", "/opt/flask_env/run_flask.sh"], check=True)
-
 
 if __name__ == "__main__":
     main()

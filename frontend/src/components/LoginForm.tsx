@@ -11,7 +11,7 @@ const LoginForm: React.FC = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
-
+      
         console.log("Submitting login", { email, password });
 
         fetch('http://localhost:5000/api/login', {
@@ -37,6 +37,7 @@ const LoginForm: React.FC = () => {
             setError('Login failed');
         });
     };
+
 
     return (
         <div className={styles.loginContainer}>
