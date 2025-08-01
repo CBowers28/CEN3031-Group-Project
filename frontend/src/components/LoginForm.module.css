@@ -1,0 +1,106 @@
+.loginContainer {
+    background: #f5f5dc;
+    border-radius: 20px;
+    padding: 2.5rem;
+    border: 3px solid #8fbc8f;
+    box-shadow: 0 8px 32px rgba(44, 62, 80, 0.3);
+    width: 350px;
+    position: relative;
+    overflow: hidden;
+}
+
+.formHeader {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.title {
+    color: #2c3e50;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+.subtitle {
+    color: #8fbc8f;
+    margin: 0;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.inputContainer {
+    position: relative;
+}
+
+.input {
+    width: 280px;
+    padding: 1rem 1rem 1rem 3rem;
+    border-radius: 12px;
+    background: #f5f5dc;
+    color: #2c3e50;
+    font-size: 1rem;
+    outline: none;
+    border: 2px solid #8fbc8f;
+    font-family: 'Inter', sans-serif;
+}
+
+.input::placeholder {
+    color: #8fbc8f;
+}
+
+.icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666666;
+    font-size: 1.2rem;
+}
+
+.errorMessage {
+    color: #e74c3c;
+    background: #fdf2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    text-align: center;
+    width: 280px;
+    font-family: 'Inter', sans-serif;
+}
+
+.submitButton {
+    width: 280px;
+    padding: 1rem;
+    border: none;
+    border-radius: 12px;
+    background: #8fbc8f;
+    color: #2c3e50;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.2s ease;
+}
+
+.submitButton:hover {
+    background: #6b8e6b;
+}
+
+.submitButton:disabled {
+    background: #95a5a6;
+    color: #7f8c8d;
+    cursor: not-allowed;
+}
+
+
+
+ 

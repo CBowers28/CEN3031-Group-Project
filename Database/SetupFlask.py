@@ -115,7 +115,7 @@ cur.execute('''
 ''')
 
 cur.execute('INSERT INTO login (email, password) VALUES (%s, %s)',
-            ('admin', 'admin'))
+            ('admin@admin.com', 'admin'))
 conn.commit()
 cur.close()
 conn.close()
@@ -125,9 +125,9 @@ conn.close()
     print("✅ Created flask_app/init_db.py")
 
     # app.py
-    app_code = f"""import os
+    app_code = """import os
 import psycopg2
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -142,27 +142,26 @@ def get_db_connection():
     )
     return conn
 
-@app.route('/api/login')
-def api_login():
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM login;')
-    rows = cur.fetchall()
-    cur.close()
-    conn.close()
+@app.route('/api/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
 
-    login = [
-        {{
-            'id': row[0],
-            'email': row[1],
-            'password': row[2],
-        }}
-        for row in rows
+    # Dummy user list (ideally you'd query your database here)
+    users = [
+        { "id": 1, "email": "admin@admin.com", "password": "admin" }
     ]
-    return jsonify(login)
+
+    for user in users:
+        if user["email"] == email and user["password"] == password:
+            return jsonify(success=True)
+
+    return jsonify(success=False)
 
 if __name__ == '__main__':
-    app.run(host = '0.0.0.0', port = 5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
+
 """
     with open(os.path.join(APP_DIR, "app.py"), "w") as f:
         f.write(app_code)

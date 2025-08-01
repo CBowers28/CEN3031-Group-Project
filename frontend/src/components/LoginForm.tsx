@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styles from './LoginForm.module.css';
 
 const LoginForm: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -10,63 +11,93 @@ const LoginForm: React.FC = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
-        
-        fetch('http://localhost:5000/api/login')
-          .then(res => {
-            if (!res.ok) throw new Error('Network response not ok');
+      
+        console.log("Submitting login", { email, password });
+
+        fetch('http://localhost:5000/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        })
+        .then((res) => {
+            if (!res.ok) throw new Error('Invalid login');
             return res.json();
-          })
-          .then((users: { id: number; email: string; password: string }[]) => {
-            const user = users.find(
-              (u) => u.email === email && u.password === password
-            );
-        
-            if (user) {
-              navigate('/dashboard');
+        })
+        .then((data) => {
+            if (data.success) {
+                navigate('/dashboard');
             } else {
-              setError('Invalid email or password');
+                setError('Invalid email or password');
             }
-          })
-          .catch((err) => {
-            console.error('Failed to fetch:', err);
-            setError('Failed to connect to server');
-          });
-        };
+        })
+        .catch((err) => {
+            console.error('Login error:', err);
+            setError('Login failed');
+        });
+    };
 
-    return(
-        <form
-            onSubmit={handleSubmit}
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1rem',
-                padding: '2rem',
-                border: '1px solid #ccc',
-                borderRadius: '8px',
-                backgroundColor: '#f9f9f9',
-                width: '300px'
-            }}
-        >
-            <h2 style={{ textAlign: 'center', color: 'black'}}>Login</h2>
 
-            <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-            />
+    return (
+        <div className={styles.loginContainer}>
+            {/* Form header */}
+            <div className={styles.formHeader}>
+                <h2 className={styles.title}>
+                    Welcome Back
+                </h2>
+                <p className={styles.subtitle}>
+                    Sign in to continue your journey
+                </p>
+            </div>
 
-            <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-            />
+            <form onSubmit={handleSubmit} className={styles.form}>
+                {/* Email Input */}
+                <div className={styles.inputContainer}>
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className={styles.input}
+                    />
+                    <div className={styles.icon}>
+                        ✉
+                    </div>
+                </div>
 
-            <button type="submit">Log In</button>
-        </form>
+                {/* Password Input */}
+                <div className={styles.inputContainer}>
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        className={styles.input}
+                    />
+                    <div className={styles.icon}>
+                        🔒
+                    </div>
+                </div>
+
+                {/* Error Message */}
+                {error && (
+                    <div className={styles.errorMessage}>
+                        {error}
+                    </div>
+                )}
+
+                {/* Submit Button */}
+                <button 
+                    type="submit" 
+                    className={styles.submitButton}
+                >
+                    Sign In
+                </button>
+            </form>
+        </div>
     );
 };
 
