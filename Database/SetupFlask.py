@@ -148,21 +148,53 @@ def login():
     email = data.get('email')
     password = data.get('password')
 
-    # Dummy user list (ideally you'd query your database here)
-    users = [
-        { "id": 1, "email": "admin@admin.com", "password": "admin" }
-    ]
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT password FROM login WHERE email = %s', (email,))
+    result = cur.fetchone()
+    cur.close()
+    conn.close()
 
-    for user in users:
-        if user["email"] == email and user["password"] == password:
-            return jsonify(success=True)
+    if result is None:
+        return jsonify({"error": "Email not found"}), 404
 
-    return jsonify(success=False)
+    stored_password = result[0]
+    if stored_password != password:
+        return jsonify({"error": "Invalid password"}), 401
+
+    return jsonify({"success": True})
+
+@app.route('/api/signup', methods=['POST'])  # <-- ✅ NEW ENDPOINT
+def signup():
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
+
+    if not email or not password:
+        return jsonify({"error": "Missing fields"}), 400
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    # Check if email already exists
+    cur.execute('SELECT 1 FROM login WHERE email = %s', (email,))
+    if cur.fetchone():
+        cur.close()
+        conn.close()
+        return jsonify({"error": "Email already registered"}), 409
+
+    cur.execute('INSERT INTO login (email, password) VALUES (%s, %s)', (email, password))
+    conn.commit()
+    cur.close()
+    conn.close()
+
+    return jsonify({"success": True})  # <-- returns the same shape as login
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
-
 """
+
+
     with open(os.path.join(APP_DIR, "app.py"), "w") as f:
         f.write(app_code)
     print("✅ Created flask_app/app.py")
