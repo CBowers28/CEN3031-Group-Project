@@ -86,15 +86,15 @@ def install_python_packages_in_venv():
     print("Upgrading pip in virtual environment...")
     run_command([pip_path, "install", "--upgrade", "pip"])
 
-    print("Installing Flask and psycopg2-binary in virtual environment...")
-    run_command([pip_path, "install", "Flask", "psycopg2-binary", "flask-cors"])
+    print("Installing Flask, psycopg2-binary, flask-cors, and bcrypt in virtual environment...")
+    run_command([pip_path, "install", "Flask", "psycopg2-binary", "flask-cors", "bcrypt"])
 
 def create_flask_app_files():
     os.makedirs(APP_DIR, exist_ok=True)
 
-    # init_db.py
     init_db_code = f"""import os
 import psycopg2
+import bcrypt
 
 conn = psycopg2.connect(
     host="localhost",
@@ -102,7 +102,6 @@ conn = psycopg2.connect(
     user="{DB_USERNAME}",
     password="{DB_PASSWORD}"
 )
-
 cur = conn.cursor()
 
 cur.execute('DROP TABLE IF EXISTS login;')
@@ -114,8 +113,9 @@ cur.execute('''
     );
 ''')
 
-cur.execute('INSERT INTO login (email, password) VALUES (%s, %s)',
-            ('admin@admin.com', 'admin'))
+hashed = bcrypt.hashpw(b"admin", bcrypt.gensalt()).decode('utf-8')
+cur.execute('INSERT INTO login (email, password) VALUES (%s, %s)', ('admin@admin.com', hashed))
+
 conn.commit()
 cur.close()
 conn.close()
@@ -124,9 +124,9 @@ conn.close()
         f.write(init_db_code)
     print("✅ Created flask_app/init_db.py")
 
-    # app.py
     app_code = """import os
 import psycopg2
+import bcrypt
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
@@ -134,13 +134,12 @@ app = Flask(__name__)
 CORS(app)
 
 def get_db_connection():
-    conn = psycopg2.connect(
+    return psycopg2.connect(
         host='localhost',
         database='user_auth',
         user=os.environ['DB_USERNAME'],
         password=os.environ['DB_PASSWORD']
     )
-    return conn
 
 @app.route('/api/login', methods=['POST'])
 def login():
@@ -159,12 +158,12 @@ def login():
         return jsonify({"error": "Email not found"}), 404
 
     stored_password = result[0]
-    if stored_password != password:
+    if not bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8')):
         return jsonify({"error": "Invalid password"}), 401
 
     return jsonify({"success": True})
 
-@app.route('/api/signup', methods=['POST'])  # <-- ✅ NEW ENDPOINT
+@app.route('/api/signup', methods=['POST'])
 def signup():
     data = request.get_json()
     email = data.get('email')
@@ -175,26 +174,23 @@ def signup():
 
     conn = get_db_connection()
     cur = conn.cursor()
-
-    # Check if email already exists
     cur.execute('SELECT 1 FROM login WHERE email = %s', (email,))
     if cur.fetchone():
         cur.close()
         conn.close()
         return jsonify({"error": "Email already registered"}), 409
 
-    cur.execute('INSERT INTO login (email, password) VALUES (%s, %s)', (email, password))
+    hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+    cur.execute('INSERT INTO login (email, password) VALUES (%s, %s)', (email, hashed))
     conn.commit()
     cur.close()
     conn.close()
 
-    return jsonify({"success": True})  # <-- returns the same shape as login
+    return jsonify({"success": True})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
 """
-
-
     with open(os.path.join(APP_DIR, "app.py"), "w") as f:
         f.write(app_code)
     print("✅ Created flask_app/app.py")
@@ -211,11 +207,9 @@ echo "🔁 Initializing database..."
 echo "🚀 Starting Flask app..."
 {PYTHON_PATH} {APP_DIR}/app.py
 '''
-
     run_path = "/opt/flask_env/run_flask.sh"
     with open(run_path, "w") as f:
         f.write(runner_script)
-
     os.chmod(run_path, 0o755)
     print(f"\n✅ All set! Run your app with:\nsudo {run_path}")
 
@@ -223,13 +217,10 @@ def main():
     ensure_root()
     os_id = detect_os()
     print(f"Detected OS: {os_id}")
-
     install_pip_and_venv(os_id)
     install_python_packages_in_venv()
     create_flask_app_files()
     create_runner_script()
-
-    # Automatically run it
     print("\n🚀 Running the Flask app setup script now...\n")
     subprocess.run(["sudo", "/opt/flask_env/run_flask.sh"], check=True)
 
