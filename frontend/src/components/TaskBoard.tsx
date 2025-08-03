@@ -15,9 +15,10 @@ interface Task {
 
 interface TaskBoardProps {
     onTaskComplete?: (taskId: string, tokensEarned: number) => void;
+    onTaskStatusChange?: (hasInProgressTask: boolean) => void;
 }
 
-const TaskBoard: React.FC<TaskBoardProps> = ({ onTaskComplete }) => {
+const TaskBoard: React.FC<TaskBoardProps> = ({ onTaskComplete, onTaskStatusChange }) => {
     const [tasks, setTasks] = useState<Task[]>([
         {
             id: '1',
@@ -78,12 +79,22 @@ const TaskBoard: React.FC<TaskBoardProps> = ({ onTaskComplete }) => {
             requiredMinutes: 0.083, // 5 seconds = 0.083 minutes
             completionMessage: 'You completed an important ancient practice that has a wide variety of benefits such as stress reduction, improved focus, better sleep, and enhanced emotional regulation. Your breath is your anchor to the present moment.',
             inspirationalQuote: 'Breathing is the greatest pleasure in life.'
+        },
+        {
+            id: '7',
+            title: 'Demo Task - Quick Win',
+            description: 'A demonstration task that shows how the reward system works. Complete this 5-second task to earn 60 cogni cash instantly!',
+            estimatedTime: '5sec',
+            status: 'not-started',
+            requiredMinutes: 0.083, // 5 seconds = 0.083 minutes
+            completionMessage: 'Demo completed! You just experienced the NEPSIS reward system in action. This quick win demonstrates how completing tasks earns you cogni cash that can be spent in the reward store.',
+            inspirationalQuote: 'Every journey begins with a single step.'
         }
     ]);
 
     const handleTaskClick = (taskId: string) => {
-        setTasks(prevTasks => 
-            prevTasks.map(task => {
+        setTasks(prevTasks => {
+            const updatedTasks = prevTasks.map(task => {
                 if (task.id === taskId) {
                     return { ...task, status: 'in-progress' as const };
                 } else if (task.status === 'in-progress') {
@@ -91,33 +102,58 @@ const TaskBoard: React.FC<TaskBoardProps> = ({ onTaskComplete }) => {
                     return { ...task, status: 'not-started' as const };
                 }
                 return task;
-            })
-        );
+            });
+
+            // Check if any task is now in progress and notify parent
+            const hasInProgressTask = updatedTasks.some(task => task.status === 'in-progress');
+            if (onTaskStatusChange) {
+                onTaskStatusChange(hasInProgressTask);
+            }
+
+            return updatedTasks;
+        });
     };
 
     const handleTaskReset = (taskId: string) => {
-        setTasks(prevTasks => 
-            prevTasks.map(task => 
+        setTasks(prevTasks => {
+            const updatedTasks = prevTasks.map(task => 
                 task.id === taskId 
                     ? { ...task, status: 'not-started' as const }
                     : task
-            )
-        );
+            );
+
+            // Check if any task is still in progress and notify parent
+            const hasInProgressTask = updatedTasks.some(task => task.status === 'in-progress');
+            if (onTaskStatusChange) {
+                onTaskStatusChange(hasInProgressTask);
+            }
+
+            return updatedTasks;
+        });
     };
 
     const handleTaskComplete = (taskId: string) => {
         const task = tasks.find(t => t.id === taskId);
         if (task) {
             // Calculate tokens earned (1 token per minute of required time)
-            const tokensEarned = Math.floor(task.requiredMinutes);
+            // Special case: Demo task gives 60 tokens regardless of time
+            const tokensEarned = taskId === '7' ? 60 : Math.floor(task.requiredMinutes);
             
-            setTasks(prevTasks => 
-                prevTasks.map(t => 
+            setTasks(prevTasks => {
+                const updatedTasks = prevTasks.map(t => 
                     t.id === taskId 
                         ? { ...t, status: 'done' as const }
                         : t
-                )
-            );
+                );
+
+                // Check if any task is still in progress and notify parent
+                const hasInProgressTask = updatedTasks.some(task => task.status === 'in-progress');
+                if (onTaskStatusChange) {
+                    onTaskStatusChange(hasInProgressTask);
+                }
+
+                return updatedTasks;
+            });
 
             // Notify parent component about completion and tokens earned
             if (onTaskComplete) {
