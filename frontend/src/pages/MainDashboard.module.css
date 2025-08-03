@@ -1,0 +1,66 @@
+/* MainDashboard fixed layout styles */
+.dashboardContainer {
+    min-height: 100vh;
+    min-width: 1200px;
+    width: max-content;
+    box-sizing: border-box;
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.taskBoardSection {
+    width: 700px;
+    min-width: 700px;
+    flex-shrink: 0;
+}
+
+.sidebarSection {
+    width: 400px;
+    min-width: 400px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: stretch;
+}
+
+/* Remove responsive behavior - keep fixed layout */
+@media (max-width: 1024px) {
+    .dashboardContainer {
+        /* Keep horizontal layout even on smaller screens */
+        flex-direction: row !important;
+        min-width: 1200px !important;
+    }
+    
+    .taskBoardSection {
+        width: 700px !important;
+        min-width: 700px !important;
+    }
+    
+    .sidebarSection {
+        width: 400px !important;
+        min-width: 400px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboardContainer {
+        /* Maintain fixed layout on mobile too */
+        padding: 0.5rem !important;
+        gap: 1.5rem !important;
+        min-width: 1100px !important;
+    }
+    
+    .taskBoardSection {
+        width: 650px !important;
+        min-width: 650px !important;
+    }
+    
+    .sidebarSection {
+        width: 350px !important;
+        min-width: 350px !important;
+    }
+}

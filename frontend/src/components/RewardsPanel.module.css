@@ -1,16 +1,13 @@
 .rewardsPanel {
-    flex: 1;
-    border: 3px solid #2c3e50; /* Dark blue-gray border (inverse of matcha) */
+    border: 3px solid #2c3e50;
     border-radius: 16px;
-    background: linear-gradient(135deg, #2c3e50, #34495e); /* Dark gradient (inverse of beige) */
+    background: linear-gradient(135deg, #2c3e50, #34495e);
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    min-width: 320px;
-    max-width: 420px;
+    width: 100%;
     box-shadow: 0 8px 24px rgba(44, 62, 80, 0.3);
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    height: calc(100vh - 4rem);
 }
 
 .rewardsPanel::-webkit-scrollbar {
@@ -163,4 +160,127 @@
 
 .infoList li::marker {
     color: #8fbc8f; /* Matcha green bullets */
+}
+
+/* Screen Time Status Section */
+.screenTimeStatus {
+    background: rgba(143, 188, 143, 0.15);
+    border: 2px solid #8fbc8f;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.screenTimeTitle {
+    color: #8fbc8f;
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.timeDisplay {
+    color: #ecf0f1;
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.pauseButton {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 0.5rem;
+}
+
+.pauseButton:hover {
+    background: #c0392b;
+    transform: translateY(-1px);
+}
+
+.pauseButton.paused {
+    background: #27ae60;
+}
+
+.pauseButton.paused:hover {
+    background: #219a52;
+}
+
+.statusNote {
+    color: #bdc3c7;
+    font-size: 0.8rem;
+    margin: 0;
+    font-style: italic;
+}
+
+/* Reward Store Section */
+.rewardStore {
+    background: rgba(52, 152, 219, 0.1);
+    border: 2px solid #3498db;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.storeTitle {
+    color: #3498db;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.storeDescription {
+    color: #bdc3c7;
+    font-size: 0.85rem;
+    margin: 0 0 1rem 0;
+    text-align: center;
+}
+
+.storeGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.storeItem {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    font-family: inherit;
+}
+
+.storeItem:hover:not(.disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+    background: linear-gradient(135deg, #5dade2, #3498db);
+}
+
+.storeItem.disabled {
+    background: linear-gradient(135deg, #7f8c8d, #95a5a6);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.itemLabel {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.itemCost {
+    font-size: 0.8rem;
+    opacity: 0.9;
 } 
