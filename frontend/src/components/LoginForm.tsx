@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './LoginForm.module.css';
 
 const LoginForm: React.FC = () => {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
@@ -12,30 +12,24 @@ const LoginForm: React.FC = () => {
         e.preventDefault();
         setError(null);
 
-        console.log("Submitting login", { email, password });
+        console.log("Submitting login", { username, password });
 
-        fetch('http://localhost:5000/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
-        })
-        .then((res) => {
-            if (!res.ok) throw new Error('Invalid login');
-            return res.json();
-        })
-        .then((data) => {
-            if (data.success) {
-                navigate('/dashboard');
-            } else {
-                setError('Invalid email or password');
-            }
-        })
-        .catch((err) => {
-            console.error('Login error:', err);
-            setError('Login failed');
-        });
+        // Mock authentication - accept any non-empty username and password
+        if (username.trim() && password.trim()) {
+            // Store user info in localStorage for session persistence
+            const userData = {
+                id: 1,
+                username: username,
+                email: username.includes('@') ? username : `${username}@example.com`
+            };
+            localStorage.setItem('user', JSON.stringify(userData));
+            localStorage.setItem('isLoggedIn', 'true');
+            
+            // Navigate to dashboard
+            navigate('/dashboard');
+        } else {
+            setError('Please enter both username and password');
+        }
     };
 
     return (
@@ -51,13 +45,13 @@ const LoginForm: React.FC = () => {
             </div>
 
             <form onSubmit={handleSubmit} className={styles.form}>
-                {/* Email Input */}
+                {/* Username Input */}
                 <div className={styles.inputContainer}>
                     <input
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        type="text"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                         required
                         className={styles.input}
                     />
