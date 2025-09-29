@@ -1,16 +1,16 @@
 .rewardsPanel {
-    flex: 1;
-    border: 3px solid #2c3e50; /* Dark blue-gray border (inverse of matcha) */
+    border: 3px solid #8fbc8f; /* Matcha green border to match task columns */
     border-radius: 16px;
-    background: linear-gradient(135deg, #2c3e50, #34495e); /* Dark gradient (inverse of beige) */
+    background: #f5f5dc; /* Light beige background to match theme */
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    min-width: 320px;
-    max-width: 420px;
-    box-shadow: 0 8px 24px rgba(44, 62, 80, 0.3);
+    height: 100%;
+    box-shadow: 0 4px 12px rgba(143, 188, 143, 0.1);
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    height: calc(100vh - 4rem);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #8fbc8f #f5f5dc;
 }
 
 .rewardsPanel::-webkit-scrollbar {
@@ -18,7 +18,7 @@
 }
 
 .rewardsPanel::-webkit-scrollbar-track {
-    background: #2c3e50;
+    background: #f5f5dc;
     border-radius: 4px;
 }
 
@@ -33,13 +33,13 @@
 
 .panelTitle {
     text-align: center;
-    color: #ecf0f1; /* Light text (inverse of dark text) */
+    color: #2c3e50; /* Dark text to match light theme */
     margin: 0 0 1.5rem 0;
     font-size: 1.5rem;
     font-weight: 700;
     font-family: 'Poppins', 'Inter', sans-serif;
     padding-bottom: 1rem;
-    border-bottom: 3px solid #6b8e6b; /* Matcha green border (inverse of matcha border) */
+    border-bottom: 3px solid #8fbc8f; /* Matcha green border */
     letter-spacing: -0.02em;
     text-transform: uppercase;
     font-size: 0.9rem;
@@ -54,12 +54,12 @@
 }
 
 .tokenCard {
-    background: #f5f5dc; /* Beige background (inverse of dark) */
-    color: #2c3e50; /* Dark text (inverse of light) */
+    background: #ffffff; /* White background for better contrast */
+    color: #2c3e50; /* Dark text */
     padding: 1.25rem;
     border-radius: 12px;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(245, 245, 220, 0.2);
+    box-shadow: 0 4px 12px rgba(143, 188, 143, 0.2);
     border: 2px solid #8fbc8f; /* Matcha green border */
     font-family: 'Inter', sans-serif;
     transition: all 0.3s ease;
@@ -67,7 +67,7 @@
 
 .tokenCard:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(245, 245, 220, 0.3);
+    box-shadow: 0 6px 16px rgba(143, 188, 143, 0.3);
     border-color: #6b8e6b;
 }
 
@@ -93,12 +93,13 @@
 }
 
 .statsSection {
-    background: rgba(245, 245, 220, 0.1); /* Beige with low opacity */
+    background: #ffffff; /* White background for better contrast */
     border-radius: 12px;
     padding: 1.25rem;
     margin-bottom: 1.5rem;
     border: 2px solid rgba(143, 188, 143, 0.3); /* Matcha green border */
     font-family: 'Inter', sans-serif;
+    box-shadow: 0 2px 8px rgba(143, 188, 143, 0.1);
 }
 
 .statItem {
@@ -115,7 +116,7 @@
 
 .statLabel {
     font-weight: 600;
-    color: #ecf0f1; /* Light text */
+    color: #2c3e50; /* Dark text for light background */
     font-size: 0.9rem;
     font-family: 'Inter', sans-serif;
 }
@@ -128,25 +129,26 @@
 }
 
 .infoSection {
-    background: rgba(245, 245, 220, 0.1); /* Beige with low opacity */
+    background: #ffffff; /* White background for better contrast */
     border-radius: 12px;
     padding: 1.25rem;
     border-left: 4px solid #8fbc8f; /* Matcha green accent */
     font-family: 'Inter', sans-serif;
+    box-shadow: 0 2px 8px rgba(143, 188, 143, 0.1);
 }
 
 .infoTitle {
     margin: 0 0 0.75rem 0;
     font-size: 1rem;
     font-weight: 600;
-    color: #ecf0f1; /* Light text */
+    color: #2c3e50; /* Dark text for light background */
     font-family: 'Poppins', 'Inter', sans-serif;
 }
 
 .infoList {
     margin: 0;
     padding-left: 1.2rem;
-    color: #ecf0f1; /* Light text */
+    color: #2c3e50; /* Dark text for light background */
     font-size: 0.9rem;
     line-height: 1.5;
     font-family: 'Inter', sans-serif;

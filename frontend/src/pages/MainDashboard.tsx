@@ -16,22 +16,21 @@ const MainDashboard: React.FC = () => {
     return (
         <div style={{
             display: 'flex', 
-            minHeight: '100vh', 
+            height: '100vh', 
             padding: '1rem', 
             gap: '2rem',
             background: '#f5f5dc', /* Beige background */
             fontFamily: 'Inter, Segoe UI, Tahoma, Geneva, Verdana, sans-serif',
-            overflowY: 'hidden', /* Prevent vertical scrolling */
-            alignItems: 'center',
-            justifyContent: 'center'
+            overflowX: 'auto', /* Allow horizontal scrolling */
+            overflowY: 'hidden' /* Prevent vertical scrolling */
         }}>
-            {/* Left: Task board (2/3 width) */}
-            <div style={{ flex: 2, display: 'flex', alignItems: 'center' }}>
+            {/* Task board - fixed width to ensure proper column display */}
+            <div style={{ minWidth: '1200px', display: 'flex', flexShrink: 0 }}>
                 <TaskBoard onTaskComplete={handleTaskComplete} />
             </div>
 
-            {/* Right: Rewards Panel */}
-            <div style={{flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            {/* Rewards Panel - fixed width, accessible via horizontal scroll */}
+            <div style={{ minWidth: '350px', display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
                 <RewardsPanel 
                     totalTokens={totalTokens}
                     todayTokens={todayTokens}

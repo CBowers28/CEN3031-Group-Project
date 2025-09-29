@@ -12,14 +12,14 @@ interface Task {
     inspirationalQuote: string;
 }
 
-interface TaskCardProps {
+interface TaskCardProps {   
     task: Task;
     onClick: (taskId: string) => void;
     onReset: (taskId: string) => void;
     onComplete: (taskId: string) => void;
 }
 
-const TaskCard: React.FC<TaskCardProps> = ({ task, onClick, onReset, onComplete }) => {
+const TaskCard: React.FC<TaskCardProps> = ({ task, onClick, onReset, onComplete }) => { //
     const [isStarted, setIsStarted] = useState(false);
     const [timeElapsed, setTimeElapsed] = useState(0);
     const [points, setPoints] = useState(0);
@@ -60,13 +60,13 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onClick, onReset, onComplete 
         }
     };
 
-    const handleStart = (e: React.MouseEvent) => {
+    const handleStart = (e: React.MouseEvent) => { //mouse events are usually used to monitor button clicks and change states
         e.stopPropagation(); // Prevent the main card click
         setIsStarted(true);
         setIsPaused(false);
     };
 
-    const handlePause = (e: React.MouseEvent) => {
+    const handlePause = (e: React.MouseEvent) => { //passed into onClick()
         e.stopPropagation(); // Prevent the main card click
         setIsPaused(true);
     };
